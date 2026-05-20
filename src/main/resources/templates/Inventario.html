@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org", lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Plataforma de Inventario</title>
+    </head>
+    <body>
+        <div class="background">
+            <div class="container">
+                <header>
+                    <nav>
+                        <a th:href="@{/home}">Inicio</a>
+                        <a th:href="@{/inventario}">Ver Inventario</a>
+                        <a th:href="@{/nuevo}">Registrar Producto</a>
+                    </nav>
+                </header>
+        <table border="1">
+
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Stock</th>
+            </tr>
+
+            <tr th:each="p : ${productos}">
+                <td th:text="${p.idProducto}"></td>
+                <td th:text="${p.nomProducto}"></td>
+                <td th:text="${p.descripcionProducto}"></td>
+                <td th:text="${p.ingresoProducto}"></td>
+
+                 <td>
+                    <a th:href="@{'/editar/' + ${p.idProducto}}">Editar</a>
+                    <a th:href="@{'/eliminar/' + ${p.idProducto}}">Eliminar</a>
+                    <a th:href="@{'/detalle/' + ${p.idProducto}}">Ver</a>
+                </td>
+                
+            </tr>
+
+        </table>
+
+            </div>
+        </div>
+    </body>
+</html>

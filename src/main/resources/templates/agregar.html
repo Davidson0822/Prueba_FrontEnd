@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org", lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>GuardarNuevosProductos</title>
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <header>
+                <nav>
+                    <a th:href="@{/home}">Inicio</a>
+                    <a th:href="@{/inventario}">Ver Inventario</a>
+                    <a th:href="@{/nuevo}">Registrar Producto</a>
+                </nav>
+            </header>
+            <div class="TextContainer">
+                <h1>Agregar producto</h1>
+
+                <form th:action="@{/guardar}" method="post">
+
+<!--                    <input type="number" name="idProducto" placeholder="ID">-->
+                    <input type="text" name="nomProducto" placeholder="Nombre">
+                    <input type="text" name="descripcionProducto" placeholder="Descripción">
+
+                    <button type="submit">Guardar</button>
+
+                </form>
+            </div>
+        </div>
+    </body>
+
+
+
+</body>
+</html>
