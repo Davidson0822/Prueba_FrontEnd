@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Detalle</title>
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <header>
+                <nav>
+                    <a th:href="@{/home}">Inicio</a>
+                    <a th:href="@{/inventario}">Ver Inventario</a>
+                    <a th:href="@{/nuevo}">Registrar Producto</a>
+                </nav>
+            </header>
+
+            <div class="TextContainer">
+
+                <h1>Detalle del producto</h1>
+
+                <p>ID: <span th:text="${producto.idProducto}"></span></p>
+                <p>Nombre: <span th:text="${producto.nomProducto}"></span></p>
+                <p>Descripción: <span th:text="${producto.descripcionProducto}"></span></p>
+                <p>Fecha: <span th:text="${producto.ingresoProducto}"></span></p>
+
+                <a th:href="@{/inventario}">Volver</a>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
