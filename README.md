@@ -15,11 +15,8 @@ Markdown
 
 ## 🛠️ Tecnologías Utilizadas
 
-*   **Framework/Librería:** [Por ejemplo: React.js, Vue.js, Angular, Next.js]
-*   **Estilos:** [Por ejemplo: Tailwind CSS, Bootstrap, Material UI, CSS Modules]
-*   **Gestión de Estado:** [Por ejemplo: Redux Toolkit, Context API, Vuex]
-*   **Cliente HTTP:** [Por ejemplo: Axios, Fetch API]
-*   **Construcción (Bundler):** [Por ejemplo: Vite, Webpack]
+* Rest Template
+* Thymeleaf
 
 *   ---
 
