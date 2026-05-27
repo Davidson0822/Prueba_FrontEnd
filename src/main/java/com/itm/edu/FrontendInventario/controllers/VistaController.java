@@ -44,10 +44,11 @@ public class VistaController {
         return "agregar";
     }
 
-    @PostMapping("/guardar")
+       @PostMapping("/guardar")
     public String guardar(
             @RequestParam String nomProducto,
-            @RequestParam String descripcionProducto
+            @RequestParam String descripcionProducto,
+            Model model
     )
     {
 
@@ -62,13 +63,22 @@ public class VistaController {
 
         RestTemplate rest = new RestTemplate();
 
-        rest.postForObject(
-                API + "/nuevo",
-                producto,
-                Integer.class
-        );
+        try
+        {
+            rest.postForObject(
+                    API + "/nuevo",
+                    producto,
+                    Integer.class
+            );
 
-        return "redirect:/inventario";
+            return "redirect:/inventario";
+        }catch (org.springframework.web.client.RestClientException e){
+            model.addAttribute("error", "Error al guardar: Verifica que los datos sean correctos o que el servidor esté activo.");
+
+            model.addAttribute("producto", producto);
+
+            return  "agregar";
+        }
     }
 
     @GetMapping("/editar/{id}")

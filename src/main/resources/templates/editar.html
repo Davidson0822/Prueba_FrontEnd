@@ -22,8 +22,8 @@
 
             <form th:action="@{'/actualizar/' + ${producto.idProducto}}" method="post">
 
-                <input type="text" name="nomProducto" th:value="${producto.nomProducto}">
-                <input type="text" name="descripcionProducto" th:value="${producto.descripcionProducto}">
+                <input type="text" name="nomProducto" th:value="${producto.nomProducto}" required minlength="3" maxlength="250">
+                <input type="text" name="descripcionProducto" th:value="${producto.descripcionProducto}" required minlength="3" maxlength="250">
                 <input type="date" name="ingresoProducto" th:value="${producto.ingresoProducto}">
 
                 <button type="submit">Actualizar</button>
