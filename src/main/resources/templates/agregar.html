@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmls:th="http://www.thymeleaf.org", lang="en">
+<html xmlns:th="http://www.thymeleaf.org", lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,20 +21,23 @@
             <div class="TextContainer">
                 <h1>Agregar producto</h1>
 
+                <div th:if="${error}" style="background-color: #ff4d4d; color: white; padding: 10px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
+                    <span th:text="${error}"></span>
+                </div>
+
+                <form th:action="@{/guardar}" method="post">
+                </form>
                 <form th:action="@{/guardar}" method="post">
 
 <!--                    <input type="number" name="idProducto" placeholder="ID">-->
-                    <input type="text" name="nomProducto" placeholder="Nombre">
-                    <input type="text" name="descripcionProducto" placeholder="Descripción">
+                    <input type="text" name="nomProducto" placeholder="Nombre" required minlength="3" maxlength="100">
+                    <input type="text" name="descripcionProducto" placeholder="Descripción" required minlength="3" maxlength="100">
 
                     <button type="submit">Guardar</button>
 
                 </form>
             </div>
         </div>
-    </body>
-
-
-
+    </div>
 </body>
 </html>
