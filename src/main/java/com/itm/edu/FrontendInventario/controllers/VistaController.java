@@ -2,6 +2,8 @@ package com.itm.edu.FrontendInventario.controllers;
 
 import com.itm.edu.FrontendInventario.models.Producto;
 
+import com.itm.edu.FrontendInventario.models.Proveedor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,12 @@ import java.util.Date;
 @RequestMapping("/")
 public class VistaController {
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     private final String API = "http://localhost:8081/docs/productos";
+
+    private final String API_PROVEEDOR = "http://localhost:8081/docs/proveedores";
 
     @GetMapping("/home")
     public String home(){
@@ -25,10 +32,10 @@ public class VistaController {
     @GetMapping("/inventario")
     public String inventario(Model model){
 
-        RestTemplate rest = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
         Producto[] productos =
-                rest.getForObject(
+                VistaController.this.restTemplate.getForObject(
                         API + "/listar",
                         Producto[].class
                 );
@@ -60,9 +67,9 @@ public class VistaController {
         producto.setDescripcionProducto(descripcionProducto);
         producto.setIngresoProducto(Date.from(fecha));
 
-        RestTemplate rest = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
-        rest.postForObject(
+        VistaController.this.restTemplate.postForObject(
                 API + "/nuevo",
                 producto,
                 Integer.class
@@ -77,10 +84,10 @@ public class VistaController {
             Model model
     ){
 
-        RestTemplate rest = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
         Producto producto =
-                rest.getForObject(
+                VistaController.this.restTemplate.getForObject(
                         API + "/" + id,
                         Producto.class
                 );
@@ -109,11 +116,11 @@ public class VistaController {
         producto.setDescripcionProducto(descripcionProducto);
         producto.setIngresoProducto(Date.from(fecha));
 
-        RestTemplate rest = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
         producto.setIdProducto(id);
 
-        rest.put(
+        VistaController.this.restTemplate.put(
                 API + "/" + id,
                 producto
         );
@@ -127,10 +134,10 @@ public class VistaController {
             Model model
     ){
 
-        RestTemplate rest = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
         Producto producto =
-                rest.getForObject(
+                VistaController.this.restTemplate.getForObject(
                         API + "/" + id,
                         Producto.class
                 );
@@ -145,13 +152,121 @@ public class VistaController {
             @PathVariable int id
     ){
 
-        RestTemplate rest = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
 
-        rest.delete(
+        VistaController.this.restTemplate.delete(
                 API + "/" + id
         );
 
         return "redirect:/inventario";
+    }
+
+    @GetMapping("/proveedores")
+    public String proveedores(Model model){
+
+        Proveedor[] proveedores =
+                restTemplate.getForObject(
+                        API_PROVEEDOR + "/listar",
+                        Proveedor[].class
+                );
+
+        model.addAttribute(
+                "proveedores",
+                proveedores
+        );
+
+        return "proveedores";
+    }
+
+    @GetMapping("/proveedores/nuevo")
+    public String nuevoProveedor(Model model){
+
+        model.addAttribute(
+                "proveedor",
+                new Proveedor()
+        );
+
+        return "agregarProveedor";
+    }
+
+    @PostMapping("/proveedores/guardar")
+    public String guardarProveedor(
+            @ModelAttribute Proveedor proveedor
+    ){
+
+        restTemplate.postForObject(
+                API_PROVEEDOR + "/nuevo",
+                proveedor,
+                Proveedor.class
+        );
+
+        return "redirect:/proveedores";
+    }
+
+    @GetMapping("/proveedores/detalle/{id}")
+    public String detalleProveedor(
+            @PathVariable Integer id,
+            Model model
+    ){
+
+        Proveedor proveedor =
+                restTemplate.getForObject(
+                        API_PROVEEDOR + "/buscar/" + id,
+                        Proveedor.class
+                );
+
+        model.addAttribute(
+                "proveedor",
+                proveedor
+        );
+
+        return "detalleProveedor";
+    }
+
+    @GetMapping("/proveedores/editar/{id}")
+    public String editarProveedor(
+            @PathVariable Integer id,
+            Model model
+    ){
+
+        Proveedor proveedor =
+                restTemplate.getForObject(
+                        API_PROVEEDOR + "/buscar/" + id,
+                        Proveedor.class
+                );
+
+        model.addAttribute(
+                "proveedor",
+                proveedor
+        );
+
+        return "editarProveedor";
+    }
+
+    @PostMapping("/proveedores/actualizar/{id}")
+    public String actualizarProveedor(
+            @PathVariable Integer id,
+            @ModelAttribute Proveedor proveedor
+    ){
+
+        restTemplate.put(
+                API_PROVEEDOR + "/actualizar/" + id,
+                proveedor
+        );
+
+        return "redirect:/proveedores";
+    }
+
+    @GetMapping("/proveedores/eliminar/{id}")
+    public String eliminarProveedor(
+            @PathVariable Integer id
+    ){
+
+        restTemplate.delete(
+                API_PROVEEDOR + "/eliminar/" + id
+        );
+
+        return "redirect:/proveedores";
     }
 
 }
