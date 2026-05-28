@@ -14,34 +14,75 @@
                         <a th:href="@{/home}">Inicio</a>
                         <a th:href="@{/inventario}">Ver Inventario</a>
                         <a th:href="@{/nuevo}">Registrar Producto</a>
+                        <a th:href="@{/proveedores}">Proveedores</a>
+                        <a th:href="@{/proveedores/nuevo}">Registrar Proveedor</a>
                     </nav>
                 </header>
-        <table border="1">
+                <div class="TextContainer">
+                    <input type="text"
+                    id="busqueda"
+                    placeholder="Buscar producto..."
+                    class="search-input">
+                </div>
+                <div class="table-container">
+                    <table border="1">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Stock</th>
+                        </tr>
 
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Stock</th>
-            </tr>
+                        <tbody id="tablaProductos">
+                            <tr th:each="p : ${productos}">
+                                <td th:text="${p.idProducto}"></td>
+                                <td class="nombre-producto" th:text="${p.nomProducto}"></td>
+                                <td th:text="${p.descripcionProducto}"></td>
+                                <td th:text="${p.ingresoProducto}"></td>
 
-            <tr th:each="p : ${productos}">
-                <td th:text="${p.idProducto}"></td>
-                <td th:text="${p.nomProducto}"></td>
-                <td th:text="${p.descripcionProducto}"></td>
-                <td th:text="${p.ingresoProducto}"></td>
-
-                 <td>
-                    <a th:href="@{'/editar/' + ${p.idProducto}}">Editar</a>
-                    <a th:href="@{'/eliminar/' + ${p.idProducto}}">Eliminar</a>
-                    <a th:href="@{'/detalle/' + ${p.idProducto}}">Ver</a>
-                </td>
-                
-            </tr>
-
-        </table>
-
+                                <td>
+                                    <a th:href="@{'/editar/' + ${p.idProducto}}">Editar</a>
+                                    <a th:href="@{'/eliminar/' + ${p.idProducto}}" onclick="return confirm('¿Eliminar producto?')">Eliminar</a>
+                                    <a th:href="@{'/detalle/' + ${p.idProducto}}">Ver</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>
+    <script>
+        const buscador =
+            document.getElementById("busqueda");
+
+        const filas =
+            document.querySelectorAll(
+                "#tablaProductos tr"
+            );
+
+        buscador.addEventListener("keyup", function(){
+
+            const texto =
+                buscador.value.toLowerCase();
+            filas.forEach(fila => {
+
+                const nombre =
+                    fila.querySelector(
+                        ".nombre-producto"
+                    ).textContent.toLowerCase();
+
+                if(nombre.includes(texto)){
+
+                    fila.style.display = "";
+
+                }else{
+
+                    fila.style.display = "none";
+                }
+
+            });
+
+        });
+    </script>
 </html>

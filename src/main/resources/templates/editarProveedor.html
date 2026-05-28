@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Editar Proveedor</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+    <div class="background">
+            <div class="container">
+                <header>
+                    <nav>
+                        <a th:href="@{/home}">Inicio</a>
+                        <a th:href="@{/inventario}">Ver Inventario</a>
+                        <a th:href="@{/nuevo}">Registrar Producto</a>
+                        <a th:href="@{/proveedores}">Proveedores</a>
+                        <a th:href="@{/proveedores/nuevo}">Registrar Proveedor</a>
+                    </nav>
+                </header>
+
+                <div class="form-container">
+
+                    <div class="TextContainer">
+                        <h1>Editar Proveedor</h1>
+                    </div>
+
+                    <form th:action="@{/inventario/proveedores/actualizar/{id}(id=${proveedor.idProveedor})}"
+                        method="post">
+
+                        <input type="number"
+                            name="idProveedor"
+                            th:value="${proveedor.idProveedor}"
+                            readonly>
+
+                        <input type="text"
+                            name="nombreProveedor"
+                            th:value="${proveedor.nombreProveedor}"
+                            required>
+
+                        <input type="text"
+                            name="contacto"
+                            th:value="${proveedor.contacto}"
+                            required>
+
+                        <input type="text"
+                            name="telefono"
+                            th:value="${proveedor.telefono}"
+                            required>
+
+                        <input type="email"
+                            name="correo"
+                            th:value="${proveedor.correo}"
+                            required>
+
+                        <button type="submit">
+                            Actualizar
+                        </button>
+
+                    </form>
+
+                    <a th:href="@{/proveedores}"
+                    class="btn-back">
+                        Volver
+                    </a>
+
+                </div>
+            </div>
+    </div>
+
+</body>
+
+</html>

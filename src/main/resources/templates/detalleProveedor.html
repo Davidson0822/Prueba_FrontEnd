@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Detalle Proveedor</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+    <div class="background">
+            <div class="container">
+                <header>
+                    <nav>
+                        <a th:href="@{/home}">Inicio</a>
+                        <a th:href="@{/inventario}">Ver Inventario</a>
+                        <a th:href="@{/nuevo}">Registrar Producto</a>
+                        <a th:href="@{/proveedores}">Proveedores</a>
+                        <a th:href="@{/proveedores/nuevo}">Registrar Proveedor</a>
+                    </nav>
+                </header>
+                <div class="TextContainer">
+                    <div class="detail-container">
+
+                        <h1>Detalle Proveedor</h1>
+
+                        <p>
+                            <strong>ID:</strong>
+                            <span th:text="${proveedor.idProveedor}"></span>
+                        </p>
+
+                        <p>
+                            <strong>Nombre:</strong>
+                            <span th:text="${proveedor.nombreProveedor}"></span>
+                        </p>
+
+                        <p>
+                            <strong>Contacto:</strong>
+                            <span th:text="${proveedor.contacto}"></span>
+                        </p>
+
+                        <p>
+                            <strong>Teléfono:</strong>
+                            <span th:text="${proveedor.telefono}"></span>
+                        </p>
+
+                        <p>
+                            <strong>Correo:</strong>
+                            <span th:text="${proveedor.correo}"></span>
+                        </p>
+
+                        <a th:href="@{/proveedores}"
+                        class="btn-back">
+                            Volver
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

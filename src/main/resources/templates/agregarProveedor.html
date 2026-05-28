@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Nuevo Proveedor</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+    <div class="background">
+            <div class="container">
+                <header>
+                    <nav>
+                        <a th:href="@{/home}">Inicio</a>
+                        <a th:href="@{/inventario}">Ver Inventario</a>
+                        <a th:href="@{/nuevo}">Registrar Producto</a>
+                        <a th:href="@{/proveedores}">Proveedores</a>
+                        <a th:href="@{/proveedores/nuevo}">Registrar Proveedor</a>
+                    </nav>
+                </header>
+                <div class="form-container">
+
+                    <div class="TextContainer">
+                        <h1>Agregar Proveedor</h1>
+                        <form th:action="@{/proveedores/guardar}"
+                            method="post">
+                            
+
+                            <input type="text"
+                                name="nombreProveedor"
+                                placeholder="Nombre proveedor"
+                                required>
+
+                            <input type="text"
+                                name="contacto"
+                                placeholder="Contacto"
+                                required>
+
+                            <input type="text"
+                                name="telefono"
+                                placeholder="Teléfono"
+                                required>
+
+                            <input type="email"
+                                name="correo"
+                                placeholder="Correo"
+                                required>
+
+                            <button type="submit">
+                                Guardar
+                            </button>
+
+                            
+
+                        </form>
+                        <a th:href="@{/proveedores}"
+                            class="btn-back">
+                                Volver
+                            </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Proveedores</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+    <div class="background">
+            <div class="container">
+                <header>
+                    <nav>
+                        <a th:href="@{/home}">Inicio</a>
+                        <a th:href="@{/inventario}">Ver Inventario</a>
+                        <a th:href="@{/nuevo}">Registrar Producto</a>
+                        <a th:href="@{/proveedores}">Proveedores</a>
+                        <a th:href="@{/proveedores/nuevo}">Registrar Proveedor</a>
+                    </nav>
+                </header>
+
+
+
+    <div class="top-bar">
+        <div class="TextContainer">
+
+        <h1>Lista de Proveedores</h1>
+
+        <input type="text"
+               id="busqueda"
+               placeholder="Buscar proveedor..."
+               class="search-input">
+
+        </div>
+
+    </div>
+
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaProveedores">
+
+            <tr th:each="p : ${proveedores}">
+
+                <td th:text="${p.idProveedor}"></td>
+
+                <td th:text="${p.nombreProveedor}"></td>
+
+                <td th:text="${p.contacto}"></td>
+
+                <td th:text="${p.telefono}"></td>
+
+                <td th:text="${p.correo}"></td>
+
+                <td>
+
+                    <a th:href="@{/proveedores/detalle/{id}(id=${p.idProveedor})}"
+                    class="btn-small">
+                        Ver
+                    </a>
+
+                    <a th:href="@{/proveedores/editar/{id}(id=${p.idProveedor})}"
+                    class="btn-small">
+                        Editar
+                    </a>
+
+                    <a th:href="@{/proveedores/eliminar/{id}(id=${p.idProveedor})}"
+                    class="btn-small delete-btn"
+                    onclick="return confirm('¿Eliminar proveedor?')">
+                        Eliminar
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+        </div>
+<script>
+
+const buscador =
+    document.getElementById("busqueda");
+
+const filas =
+    document.querySelectorAll(
+        "#tablaProveedores tr"
+    );
+
+buscador.addEventListener("keyup", function(){
+
+    const texto =
+        buscador.value.toLowerCase();
+
+    filas.forEach(fila => {
+
+        const contenido =
+            fila.textContent.toLowerCase();
+
+        if(contenido.includes(texto)){
+
+            fila.style.display = "";
+
+        }else{
+
+            fila.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>
